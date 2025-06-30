@@ -1,9 +1,11 @@
 {
   "domain": "entity_overrides",
   "name": "Persistent Entity Overrides",
-  "version": "v0.9.1-rc",
+  "version": "0.9.1-rc",
   "config_flow": true,
   "single_config_entry": true,
+  "documentation": "https://github.com/john-derose/homeassistant-entity-overrides",
+  "iot_class": "local_push",
   "requirements": [],
   "dependencies": [],
   "codeowners": ["@john-derose"]
