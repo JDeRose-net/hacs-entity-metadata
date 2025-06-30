@@ -1,7 +1,6 @@
 {
   "name": "Persistent Entity Overrides",
   "domain": "entity_overrides",
-  "description": "Export, import, and back-up entity metadata like friendly name, visibility, and enable/disable status.",
   "documentation": "https://github.com/john-derose/homeassistant-entity-overrides",
   "issue_tracker": "https://github.com/john-derose/homeassistant-entity-overrides/issues",
   "requirements": [],
