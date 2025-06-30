@@ -1,6 +1,6 @@
 {
   "domain": "entity_metadata",
-  "name": "Entity Metadata",
+  "name": "Entity Metadata Persistence",
   "codeowners": ["@john-derose"],
   "config_flow": true,
   "dependencies": [],
