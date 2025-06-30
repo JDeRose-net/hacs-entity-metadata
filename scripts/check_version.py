@@ -9,7 +9,7 @@ if len(sys.argv) != 2:
 # Strip 'v' from tag prefix if present
 git_tag = sys.argv[1].lstrip("v")
 
-manifest_path = Path("custom_components/entity_overrides/manifest.json")
+manifest_path = Path("custom_components/entity_metadata/manifest.json")
 
 try:
     with manifest_path.open() as f:
