@@ -5,21 +5,21 @@ from homeassistant.core import callback
 
 from .const import DOMAIN
 
-class EntityOverridesConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+class EntityMetadataConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
         if self._async_current_entries():
             return self.async_abort(reason="already_configured")
-        return self.async_create_entry(title="Entity Overrides", data={})
+        return self.async_create_entry(title="Entity Metadata Persistence", data={})
 
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        return EntityOverridesOptionsFlowHandler(config_entry)
+        return EntityMetadataOptionsFlowHandler(config_entry)
 
 
-class EntityOverridesOptionsFlowHandler(config_entries.OptionsFlow):
+class EntityMetadataOptionsFlowHandler(config_entries.OptionsFlow):
     def __init__(self, config_entry):
         self.config_entry = config_entry
 

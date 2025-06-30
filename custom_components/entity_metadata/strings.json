@@ -1,9 +1,9 @@
 {
-  "title": "Entity Overrides",
+  "title": "Entity Metadata",
   "config": {
     "step": {
       "user": {
-        "title": "Entity Overrides Setup",
+        "title": "Entity Metadata Setup",
         "description": "Creates the integration entry."
       }
     },
@@ -14,11 +14,11 @@
   "options": {
     "step": {
       "init": {
-        "title": "Entity Override Options",
+        "title": "Entity Metadata Options",
         "data": {
           "max_backups": "Maximum backup files to retain",
-          "enable_on_boot": "Enable override restore on Home Assistant startup",
-          "export_now": "Export overrides immediately"
+          "enable_on_boot": "Import entity metadata from override.yaml file on Home Assistant startup",
+          "export_now": "Export entity metadata to overrides.yaml file now."
         }
       }
     }

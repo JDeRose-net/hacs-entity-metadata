@@ -1,5 +1,0 @@
-export_overrides:
-  description: Export entity metadata overrides to file.
-
-apply_overrides:
-  description: Reapply metadata overrides to all known entities.
