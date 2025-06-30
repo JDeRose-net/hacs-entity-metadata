@@ -7,7 +7,7 @@ for preserving these values across integration resets.
 If you have ever had to remove a device integration (e.g., Z-Wave, etc.) and
 lost your carefully curated entity metadata, you know why we created this...
 
-## Features 🔧
+## Features 💡
 
 *	Export/import metadata for any Home Assistant entities
 *	Support for friendly_name, enabled, and visible
