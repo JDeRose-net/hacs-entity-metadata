@@ -1,6 +1,10 @@
 # Persistent Entity Overrides for Home Assistant
 
-A general-purpose Home Assistant integration that exports, imports, and backs-up entity metadata like friendly name, visibility, and enabled status — preserving these values even across integration resets. If you have ever had to remove a device integration (e.g., Z-Wave, etc.) and lost your carefully curated entity metadata, you know why I created this...
+A general-purpose Home Assistant integration that exports, imports, and backs-up
+entity metadata like friendly name, visibility, and enabled status — preserving
+these values even across integration resets. If you have ever had to remove a
+device integration (e.g., Z-Wave, etc.) and lost your carefully curated entity
+metadata, you know why I created this...
 
 ## Features 🔧
 
@@ -10,13 +14,14 @@ A general-purpose Home Assistant integration that exports, imports, and backs-up
 *	UI-based config via Home Assistant’s Integrations panel
 *	Manual export + reapply services
 
-## Installation via HACS 🔧
+## Installation via HACS 📦
 
-1.	Go to HACS → Integrations → ⋮ menu → “Custom repositories”
-2.	Add: https://github.com/john-derose/homeassistant-entity-overrides as a Integration repository
-3.	Install “Entity Overrides”
+1.	Go to HACS → ⋮ menu → Custom Repositories
+2.	Add https://github.com/john-derose/homeassistant-entity-overrides as an Integration repository
+3.	Go to Settings → Devices & Services → Add Integration
+4.  Add Persistent Entity Overrides
 4.	Restart Home Assistant
-5.	Configure via Settings → Devices & Services → Add Integration
+5.	Configure via Settings → Devices & Services → Persistent Entity Overrides → Configure
 
 ## Options 🔁
 
@@ -32,13 +37,9 @@ Accessible via the integration’s ⚙️ menu:
 | `entity_overrides.apply_overrides`  | Reapply overrides immediately       |
 | `entity_overrides.export_overrides` | Export current overrides to file   |
 
-## File Paths 🗂
+## Files 🗂
 
 *	Exports: config/entity_overrides/overrides.yaml
-*	Backups: config/entity_overrides/backups/
-
-## Example overrides.yaml 📘
-
     sensor.garage_motion_sensor_state:
       friendly_name: "Garage Motion"
     light.bedroom_lamp_color_temp:
@@ -46,10 +47,12 @@ Accessible via the integration’s ⚙️ menu:
     switch.water_heater:
       visible: false
 
-## Codeowners 🧑‍💻
+*	Backups: config/entity_overrides/backups/overrides.YYYYMMDD-HHMMSS.yaml
+
+## Codeowners 🧑💻
 
   @john-derose
 
 ## License 🪪
 
-MIT
+  MIT
