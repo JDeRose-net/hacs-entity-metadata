@@ -1,5 +1,3 @@
 {
-  "name": "Entity Metadata Persistence",
-  "domain": "entity_metadata",
-  "version": "0.9.1-rc"
+  "name": "Entity Metadata Persistence"
 }
