@@ -42,13 +42,6 @@ Accessible via the integration's ⚙️  menu:
 ## Files 🗂
 
 * config/entity_metadata/overrides.yaml
-    sensor.garage_motion_sensor_state:
-        friendly_name: "Garage Motion"
-    light.bedroom_lamp_color_temp:
-        enabled: false
-    switch.water_heater:
-        visible: false
-
 * config/entity_metadata/backups/overrides.YYYYMMDD-HHMMSS.yaml
 
 ## Codeowners 🧑💻
