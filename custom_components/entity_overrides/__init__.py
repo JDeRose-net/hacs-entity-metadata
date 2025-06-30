@@ -7,14 +7,16 @@ from homeassistant.core import HomeAssistant, callback, ServiceCall
 from homeassistant.helpers.entity_registry import async_get as async_get_entity_registry
 from homeassistant.helpers.entity_component import async_update_entity
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.helpers import config_validation as cv
 
-DOMAIN = "entity_overrides"
+from .const import DOMAIN
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 _LOGGER = logging.getLogger(__name__)
 
-CONF_FILE = "entity_overrides/settings.yaml"
-EXPORT_FILE = "entity_overrides/overrides.yaml"
-BACKUP_DIR = "entity_overrides/backups"
+EXPORT_FILE = f"{DOMAIN}/overrides.yaml"
+BACKUP_DIR = f"{DOMAIN}/backups"
 DEFAULT_MAX_BACKUPS = 5
 
 async def async_setup(hass: HomeAssistant, config: dict):
