@@ -1,7 +1,6 @@
 {
   "domain": "entity_overrides",
   "name": "Persistent Entity Overrides",
-  "version": "0.9.1-rc",
   "codeowners": ["@john-derose"],
   "config_flow": true,
   "dependencies": [],
@@ -9,4 +8,5 @@
   "iot_class": "local_push",
   "requirements": [],
   "single_config_entry": true
+  "version": "0.9.1-rc",
 }
