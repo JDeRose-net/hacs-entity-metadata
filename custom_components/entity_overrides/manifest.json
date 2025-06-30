@@ -3,6 +3,7 @@
   "name": "Persistent Entity Overrides",
   "version": "0.9.0",
   "config_flow": true,
+  "single_config_entry": true,
   "requirements": [],
   "dependencies": [],
   "codeowners": ["@john-derose"]
