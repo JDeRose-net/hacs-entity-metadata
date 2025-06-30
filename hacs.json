@@ -4,6 +4,6 @@
   "description": "Export, import, and back-up entity metadata like friendly name, visibility, and enable/disable status.",
   "documentation": "https://github.com/john-derose/homeassistant-entity-overrides",
   "codeowners": ["@john-derose"],
-  "version": "v0.9.1-rc",
+  "version": "0.9.1-rc",
   "requirements": []
 }
