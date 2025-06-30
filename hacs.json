@@ -1,8 +1,5 @@
 {
   "name": "Persistent Entity Overrides",
   "domain": "entity_overrides",
-  "documentation": "https://github.com/john-derose/homeassistant-entity-overrides",
-  "issue_tracker": "https://github.com/john-derose/homeassistant-entity-overrides/issues",
-  "requirements": [],
   "version": "0.9.1-rc"
 }
