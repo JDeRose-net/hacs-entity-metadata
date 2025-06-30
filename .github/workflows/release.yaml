@@ -1,4 +1,4 @@
-name: Release Validation
+name: release
 
 on:
   release:
@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Check manifest version matches tag
+      - name: Version
         run: python scripts/check_version.py ${{ github.ref_name }}
 
-      - name: Run HassFest
+      - name: HassFest
         uses: home-assistant/actions/hassfest@master
 
-      - name: Run HACS validation
+      - name: HACS
         uses: hacs/action@main
         with:
           category: "integration"
