@@ -1,0 +1,13 @@
+{
+  "domain": "entity_metadata",
+  "name": "Entity Metadata",
+  "codeowners": ["@john-derose"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/jderose-net/hass-entity-metadata/",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/jderose-net/hass-entity-metadata/issues",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "0.9.1-rc"
+}

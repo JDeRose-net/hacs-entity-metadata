@@ -1,0 +1,5 @@
+export_overrides:
+  description: Export entity metadata to overrides.yaml file.
+
+import_overrides:
+  description: Import entity metadata from overrides.yaml file.

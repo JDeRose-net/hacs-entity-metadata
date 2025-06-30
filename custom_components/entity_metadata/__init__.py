@@ -23,7 +23,6 @@ async def async_setup(hass: HomeAssistant, config: dict):
     return True
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    config_path = hass.config.path(CONF_FILE)
     export_path = hass.config.path(EXPORT_FILE)
     backup_path = hass.config.path(BACKUP_DIR)
     max_backups = entry.options.get("max_backups", DEFAULT_MAX_BACKUPS)
@@ -31,13 +30,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
 
     os.makedirs(backup_path, exist_ok=True)
 
-    async def apply_overrides(ignore_toggle=False):
+    async def import_metadata(ignore_toggle=False):
         if not ignore_toggle and not enable_on_boot:
-            _LOGGER.info("Entity overrides disabled via options. Skipping.")
+            _LOGGER.info("Entity metadata import disabled via options. Skipping.")
             return
 
         if not os.path.exists(export_path):
-            _LOGGER.warning("%s not found, skipping overrides", EXPORT_FILE)
+            _LOGGER.warning("%s not found, skipping import", EXPORT_FILE)
             return
 
         try:
@@ -45,7 +44,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
                 overrides = yaml.safe_load(f)
 
             if not overrides:
-                _LOGGER.info("No overrides defined in %s", EXPORT_FILE)
+                _LOGGER.info("No metadata defined in %s", EXPORT_FILE)
                 return
 
             entity_registry = async_get_entity_registry(hass)
@@ -69,12 +68,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
                     _LOGGER.info("Updated %s: %s", entity_id, updates)
 
         except Exception as e:
-            _LOGGER.exception("Failed to apply entity overrides: %s", e)
+            _LOGGER.exception("Failed to import entity metadata: %s", e)
 
     async def handle_export(call: ServiceCall):
-        await export_overrides()
+        await export_metadata()
 
-    async def export_overrides():
+    async def export_metadata():
         entity_registry = async_get_entity_registry(hass)
         data = {}
 
@@ -94,7 +93,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
             rotated_file = os.path.join(backup_path, f"overrides.{timestamp}.yaml")
             os.rename(export_path, rotated_file)
-            _LOGGER.info("Backed up existing overrides to %s", rotated_file)
+            _LOGGER.info("Backed up existing metadata to %s", rotated_file)
 
             backups = sorted([
                 f for f in os.listdir(backup_path)
@@ -111,17 +110,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         if data:
             with open(export_path, "w") as f:
                 yaml.dump({DOMAIN: data}, f)
-            _LOGGER.info("Exported %d overrides to %s", len(data), export_path)
+            _LOGGER.info("Exported %d entity metadata entries to %s", len(data), export_path)
         else:
             _LOGGER.info("No overridden entities found to export")
 
-    async def handle_apply(call: ServiceCall):
-        await apply_overrides(ignore_toggle=True)
-        _LOGGER.info("Manual reapply triggered via service call")
+    async def handle_import(call: ServiceCall):
+        await import_metadata(ignore_toggle=True)
+        _LOGGER.info("Manual import triggered via service call")
 
-    hass.bus.async_listen_once("homeassistant_started", lambda event: hass.async_create_task(apply_overrides()))
+    hass.bus.async_listen_once("homeassistant_started", lambda event: hass.async_create_task(import_metadata()))
     hass.services.async_register(DOMAIN, "export_overrides", handle_export)
-    hass.services.async_register(DOMAIN, "apply_overrides", handle_apply)
+    hass.services.async_register(DOMAIN, "import_overrides", handle_import)
 
     return True
 
