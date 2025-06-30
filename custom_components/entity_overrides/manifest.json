@@ -1,0 +1,9 @@
+{
+  "domain": "entity_overrides",
+  "name": "Persistent Entity Overrides",
+  "version": "0.9.0",
+  "config_flow": true,
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@john-derose"]
+}

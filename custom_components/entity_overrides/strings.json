@@ -1,0 +1,26 @@
+{
+  "title": "Entity Overrides",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Entity Overrides Setup",
+        "description": "Creates the integration entry."
+      }
+    },
+    "abort": {
+      "already_configured": "This integration is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Entity Override Options",
+        "data": {
+          "max_backups": "Maximum backup files to retain",
+          "enable_on_boot": "Enable override restore on Home Assistant startup",
+          "export_now": "Export overrides immediately"
+        }
+      }
+    }
+  }
+}
