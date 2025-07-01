@@ -34,10 +34,10 @@ Accessible via the integration's ⚙️  menu:
 
 ## Services 🛠
 
-| Service                             | Description                                     |
-|-------------------------------------|-------------------------------------------------|
-| `entity_overrides.export_overrides` | Export metadata values to overrides.yaml file   |
-| `entity_overrides.import_overrides` | Import metadata values from overrides.yaml file |
+| Service                            | Description                                     |
+|------------------------------------|-------------------------------------------------|
+| `entity_metadata.export_overrides` | Export metadata values to overrides.yaml file   |
+| `entity_metadata.import_overrides` | Import metadata values from overrides.yaml file |
 
 ## Files 🗂
 
