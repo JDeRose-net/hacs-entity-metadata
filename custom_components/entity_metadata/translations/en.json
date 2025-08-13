@@ -1,14 +1,15 @@
 {
   "title": "Entity Metadata Persistence",
   "config": {
+    "abort": {
+      "single_instance_allowed": "Only a single instance is required."
+    },
     "step": {
       "user": {
-        "title": "Entity Metadata Setup",
-        "description": "Creates the integration entry."
+        "title": "Entity Metadata",
+        "description": "Persist and restore user-set entity names, icons, visibility, and enabled states.",
+        "data": {}
       }
-    },
-    "abort": {
-      "already_configured": "This integration is already set up."
     }
   },
   "options": {
@@ -16,9 +17,58 @@
       "init": {
         "title": "Entity Metadata Options",
         "data": {
-          "max_backups": "Maximum backup files to retain",
-          "enable_on_boot": "Import entity metadata from override.yaml file on Home Assistant startup",
-          "export_now": "Export entity metadata to overrides.yaml file now."
+          "auto_import_on_startup": "Auto-import on Home Assistant startup",
+          "backup_retention": "Backup retention (files to keep)",
+          "export_all_entities": "Export all entities (incl. ones with no overrides)",
+          "export_include_all": "Export all entities (incl. ones with no overrides)",
+          "export_domains": "Domains to include when exporting",
+          "export_now": "Export now (one-time action)"
+        }
+      }
+    }
+  },
+  "services": {
+    "export_overrides": {
+      "name": "Export overrides",
+      "description": "Export entity metadata to overrides.yaml (and optional backup).",
+      "fields": {
+        "write_overrides": {
+          "name": "Write overrides.yaml",
+          "description": "Write to /config/etc/entity_metadata/overrides.yaml"
+        },
+        "write_backup": {
+          "name": "Write backup",
+          "description": "Create a timestamped backup under /config/etc/entity_metadata/backups/"
+        },
+        "include_all": {
+          "name": "Include entities with no overrides",
+          "description": "If enabled, export all entities (optionally limited by 'include_domains')."
+        },
+        "include_domains": {
+          "name": "Domains",
+          "description": "Only include these domains (optional)"
+        },
+        "path": {
+          "name": "Custom output path",
+          "description": "Absolute path or relative to /config"
+        }
+      }
+    },
+    "import_overrides": {
+      "name": "Import overrides",
+      "description": "Import entity metadata from overrides.yaml (or a custom path).",
+      "fields": {
+        "merge": {
+          "name": "Merge",
+          "description": "Merge with existing values (recommended). If false, unspecified fields are cleared."
+        },
+        "strict_entities": {
+          "name": "Strict entities",
+          "description": "Fail if any referenced entity_id does not exist."
+        },
+        "path": {
+          "name": "Custom input path",
+          "description": "Absolute path or relative to /config"
         }
       }
     }
