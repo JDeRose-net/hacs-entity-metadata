@@ -75,9 +75,9 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 "backup_retention": int(
                     user_input.get("backup_retention", current.get("backup_retention", 7))
                 ),
-                "export_include_all": bool(
+                "export_all_entities": bool(
                     user_input.get(
-                        "export_include_all", current.get("export_include_all", False)
+                        "export_all_entities", current.get("export_all_entities", False)
                     )
                 ),
                 "export_domains": list(
@@ -87,7 +87,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
 
             # Optional immediate export
             if export_now:
-                include_all = new_options.get("export_include_all", False)
+                include_all = new_options.get("export_all_entities", False)
                 include_domains = new_options.get("export_domains", [])
                 try:
                     await self.hass.services.async_call(
@@ -145,8 +145,8 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                     default=current.get("backup_retention", 7),
                 ): vol.Coerce(int),
                 vol.Optional(
-                    "export_include_all",
-                    default=current.get("export_include_all", False),
+                    "export_all_entities",
+                    default=current.get("export_all_entities", False),
                 ): bool,
                 vol.Optional(
                     "export_domains",

@@ -16,13 +16,20 @@
     "step": {
       "init": {
         "title": "Entity Metadata Options",
+        "description": "Configure export/import defaults and one-shot actions.",
         "data": {
           "auto_import_on_startup": "Auto-import on Home Assistant startup",
           "backup_retention": "Backup retention (files to keep)",
           "export_all_entities": "Export all entities (incl. ones with no overrides)",
-          "export_include_all": "Export all entities (incl. ones with no overrides)",
           "export_domains": "Domains to include when exporting",
           "export_now": "Export now (one-time action)"
+        },
+        "data_description": {
+          "auto_import_on_startup": "Runs import with merge: true right after HA starts.",
+          "backup_retention": "Older backups under /config/etc/entity_metadata/backups/ are pruned after each export.",
+          "export_all_entities": "Safe with merge: true. With merge: false, empty {} entries reset name/icon/hidden/disabled.",
+          "export_domains": "Optional filter. Leave empty to include all domains.",
+          "export_now": "Triggers an immediate export when you click Submit; not saved to options."
         }
       }
     }
