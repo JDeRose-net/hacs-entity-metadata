@@ -41,8 +41,8 @@ Accessible via the integration's ⚙️  menu:
 
 ## Files 🗂
 
-* config/entity_metadata/overrides.yaml
-* config/entity_metadata/backups/overrides.YYYYMMDD-HHMMSS.yaml
+* config/etc/entity_metadata/overrides.yaml
+* config/etc/entity_metadata/backups/overrides.YYYYMMDD-HHMMSS.yaml
 
 ## Codeowners 🧑💻
 
