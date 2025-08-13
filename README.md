@@ -19,7 +19,7 @@ lost your carefully curated entity metadata, you know why we created this...
 ## Installation via HACS 📦
 
 1.	Go to HACS → ⋮ menu → Custom Repositories
-2.	Add https://github.com/jderose-net/hass-entity-metadata as an Integration repository
+2.	Add https://github.com/jderose-net/hacs-entity-metadata as an Integration repository
 3.	Go to Settings → Devices & Services → Add Integration
 4.  Add Entity Metadata
 4.	Restart Home Assistant

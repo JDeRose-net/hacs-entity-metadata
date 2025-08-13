@@ -2,7 +2,7 @@
 # friendly names, enabled/hidden flags, and is overwritten on export, so do not
 # edit this file manually unless you know what you are doing.
 #
-# Documentation: https://github.com/jderose-net/hass-entity-metadata
+# Documentation: https://github.com/jderose-net/hacs-entity-metadata
 
 entity_metadata:
   #sensor.garage_motion_sensor_state:
