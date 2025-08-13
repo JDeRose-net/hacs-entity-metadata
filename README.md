@@ -30,8 +30,9 @@ lost your carefully curated entity metadata, you know why we created this...
 Accessible via the integration's ⚙️  menu:
 
 - **Export All Entities**  
-  Includes entities that have no overrides (empty `{}` objects). Helpful for full inventories and bulk editing.  
-  _Note:_ If you later import with `merge: false`, these empty entries will **reset** name/icon/hidden/disabled. Keep `merge: true` for safety.
+  Includes entities that have no overrides (empty `{}` objects). Helpful for full inventories and bulk editing. 
+  _Note:_ If you later import with the `entity_metadata.import_overrides` service and `merge: false`, 
+  these empty entries will **reset** name/icon/hidden/disabled. Keep `merge: true` for safety.
 
 - **Domains**  
   Multi-select filter applied during export. Example: `["light", "switch"]`.
