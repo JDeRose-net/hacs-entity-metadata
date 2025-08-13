@@ -118,7 +118,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         await import_metadata(ignore_toggle=True)
         _LOGGER.info("Manual import triggered via service call")
 
-    hass.bus.async_listen_once("homeassistant_started", lambda event: hass.async_create_task(import_metadata()))
+    # Schedule import_metadata() once HA has fully started,
+    # without calling async_create_task from a worker thread.
+    async def _on_hass_started(event) -> None:
+        await import_metadata()
+
+    hass.bus.async_listen_once("homeassistant_started", _on_hass_started)
+#    hass.bus.async_listen_once("homeassistant_started", lambda event: hass.async_create_task(import_metadata()))
+#    ^^^ delete me if the above change works.
     hass.services.async_register(DOMAIN, "export_overrides", handle_export)
     hass.services.async_register(DOMAIN, "import_overrides", handle_import)
 
