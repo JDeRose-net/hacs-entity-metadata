@@ -94,8 +94,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Options change listener (noop today, but ready for future options)
     remove_listener = entry.add_update_listener(_reload_on_options_change)
     hass.data[DOMAIN][DATA_LISTENERS][entry.entry_id] = remove_listener
-
     _LOGGER.debug("%s: setup_entry id=%s", DOMAIN, entry.entry_id)
+
+    # Auto-import on startup if enabled
+    if entry.options.get("auto_import_on_startup", False):
+        async def _on_started(_):
+            await hass.services.async_call(
+                DOMAIN, SERVICE_IMPORT, {"merge": True}, blocking=True
+            )
+        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STARTED, _on_started)
+
     return True
 
 
@@ -141,6 +149,21 @@ def _resolve_path(hass: HomeAssistant, maybe_path: str | None, *, default: Path)
     if not p.is_absolute():
         p = Path(hass.config.path(str(p)))
     return p
+
+async def _prune_backups(hass: HomeAssistant, keep: int) -> None:
+    """Keep only the newest N backup files; delete older ones."""
+    if keep <= 0:
+        return
+
+    def _do():
+        files = sorted(backups_dir(hass).glob("overrides-*.yaml"), reverse=True)
+        for old in files[keep:]:
+            try:
+                old.unlink()
+            except Exception:
+                pass
+
+    await hass.async_add_executor_job(_do)
 
 # ----------------------------
 # YAML read/write
@@ -350,6 +373,11 @@ async def _handle_export_service(call: ServiceCall) -> None:
         backup_path = backups_dir(hass) / f"overrides-{stamp}.yaml"
         await _write_yaml(hass, backup_path, blob)
         _LOGGER.info("%s: wrote backup -> %s", DOMAIN, backup_path)
+
+        # Honor backup_retention from the (single) config entry
+        entries = hass.config_entries.async_entries(DOMAIN)
+        keep = int(entries[0].options.get("backup_retention", 7)) if entries else 7
+        await _prune_backups(hass, keep)
 
 async def _handle_import_service(call: ServiceCall) -> None:
     hass: HomeAssistant = call.hass

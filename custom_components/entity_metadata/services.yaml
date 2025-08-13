@@ -1,5 +1,64 @@
 export_overrides:
-  description: Export entity metadata to overrides.yaml file.
+  name: Export overrides
+  description: Export entity metadata to overrides.yaml (and an optional timestamped backup).
+  fields:
+    write_overrides:
+      name: Write overrides.yaml
+      description: Write to /config/etc/entity_metadata/overrides.yaml
+      required: false
+      default: true
+      selector:
+        boolean: {}
+    write_backup:
+      name: Write backup
+      description: Create /config/etc/entity_metadata/backups/overrides-YYYYMMDD-HHMMSS.yaml
+      required: false
+      default: true
+      selector:
+        boolean: {}
+    include_all:
+      name: Include entities with no overrides
+      description: If true, include every entity (optionally limited by domains).
+      required: false
+      default: false
+      selector:
+        boolean: {}
+    include_domains:
+      name: Domains
+      description: Only include these domains (optional)
+      required: false
+      selector:
+        select:
+          multiple: true
+          options: []
+    path:
+      name: Custom output path
+      description: Absolute path or relative to /config
+      required: false
+      selector:
+        text: {}
 
 import_overrides:
-  description: Import entity metadata from overrides.yaml file.
+  name: Import overrides
+  description: Import entity metadata from overrides.yaml (or a custom path).
+  fields:
+    merge:
+      name: Merge
+      description: Merge with existing values (recommended). If false, unspecified fields are cleared.
+      required: false
+      default: true
+      selector:
+        boolean: {}
+    strict_entities:
+      name: Strict entities
+      description: Fail if any referenced entity_id does not exist.
+      required: false
+      default: false
+      selector:
+        boolean: {}
+    path:
+      name: Custom input path
+      description: Absolute path or relative to /config
+      required: false
+      selector:
+        text: {}
