@@ -28,9 +28,27 @@ lost your carefully curated entity metadata, you know why we created this...
 ## Options 🔁
 
 Accessible via the integration's ⚙️  menu:
-* Set maximum number of backup files to retain
-* Enable import on startup
-* Trigger export
+
+- **Export All Entities**  
+  Includes entities that have no overrides (empty `{}` objects). Helpful for full inventories and bulk editing.  
+  _Note:_ If you later import with `merge: false`, these empty entries will **reset** name/icon/hidden/disabled. Keep `merge: true` for safety.
+
+- **Domains**  
+  Multi-select filter applied during export. Example: `["light", "switch"]`.
+
+- **Backup retention**  
+  Number of timestamped backup files to keep under  
+  `/config/etc/entity_metadata/backups/`. Older backups are pruned after each export.
+
+- **Auto-Import on Startup**  
+  If enabled, runs `entity_metadata.import_overrides` with `merge: true` on Home Assistant start.
+
+- **Export Now**  
+  One-shot action in the Options form that immediately triggers an export (writes `overrides.yaml` and a timestamped backup). This toggle is **not** persisted.
+
+### Paths
+- **Overrides:** `/config/etc/entity_metadata/overrides.yaml`  
+- **Backups:** `/config/etc/entity_metadata/backups/overrides-YYYYMMDD-HHMMSS.yaml`
 
 ## Services 🛠
 
